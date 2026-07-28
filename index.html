@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workforce Capacity Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="logo">
+            <img src="img/logo-gm.png" alt="Logo GM">
+        </div>
+
+        <h1>Planejamento de Capacidade da Manutenção</h1>
+
+        <label for="total">Funcionários Totais</label>
+        <input type="number" id="total" value="20">
+
+        <label for="ferias">Funcionários em Férias</label>
+        <input type="number" id="ferias" value="0">
+
+        <label for="abs">Absenteísmo (%)</label>
+        <input type="number" id="abs" value="0">
+
+        <button onclick="calcular()">
+            Calcular Capacidade
+        </button>
+
+        <div class="resultado">
+
+            <div class="kpi">
+                👥 Funcionários Disponíveis:
+                <strong><span id="disp"></span></strong>
+            </div>
+
+            <div class="kpi">
+                📈 Disponibilidade:
+                <strong><span id="disponibilidade"></span>%</strong>
+            </div>
+
+            <div class="kpi">
+                ⏰ Horas por Dia:
+                <strong><span id="dia"></span></strong>
+            </div>
+
+            <div class="kpi">
+                📅 Horas por Mês:
+                <strong><span id="mes"></span></strong>
+            </div>
+
+            <div class="kpi">
+                ⚠️ Horas Perdidas:
+                <strong><span id="perdidas"></span></strong>
+            </div>
+
+            <div class="kpi verde">
+                ✅ Capacidade Real:
+                <strong><span id="real"></span></strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
