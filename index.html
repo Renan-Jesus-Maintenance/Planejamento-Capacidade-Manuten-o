@@ -4,71 +4,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workforce Capacity Dashboard</title>
+
+    <title>Calculadora de Horas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .banner {
+            position: relative;
+        }
+
+        .menu-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 10;
+
+            display: grid;
+            place-items: center;
+
+            width: 44px;
+            height: 44px;
+            padding: 0;
+
+            color: #ffffff;
+            background: linear-gradient(145deg, #0d6efd, #084298);
+            border: none;
+            border-radius: 11px;
+            box-shadow: 0 7px 15px rgba(13, 110, 253, 0.24);
+
+            font-size: 25px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .menu-lateral {
+            position: absolute;
+            top: 64px;
+            left: 12px;
+            z-index: 20;
+
+            display: none;
+            width: 230px;
+            padding: 8px;
+
+            background: #ffffff;
+            border: 1px solid #dbe5f0;
+            border-radius: 13px;
+            box-shadow: 0 16px 32px rgba(24, 55, 94, 0.16);
+        }
+
+        .menu-lateral.active {
+            display: grid;
+        }
+
+        .menu-lateral a {
+            padding: 12px;
+            color: #213a59;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .menu-lateral a:hover {
+            color: #084298;
+            background: #eef5ff;
+        }
+
+        @media (max-width: 600px) {
+            .menu-lateral {
+                width: calc(100vw - 70px);
+                max-width: 230px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="card">
+    <main class="container">
 
-        <div class="logo">
-            <img src="logo-gm.png" alt="Logo GM">
+        <div class="card-calculadora">
+
+            <div class="banner">
+
+                <button
+                    type="button"
+                    class="menu-btn"
+                    onclick="toggleMenu()"
+                    aria-label="Abrir menu"
+                    aria-controls="menu"
+                    aria-expanded="false">
+                    <span aria-hidden="true">☰</span>
+                </button>
+
+                <nav id="menu" class="menu-lateral">
+                    <a href="index.html">Calculadora de Horas</a>
+                    <a href="escala.html">Escala Planejamento</a>
+                    <a href="planejamento.html">Planejamento Manutenção</a>
+                    <a href="sobre.html">Sobre</a>
+                </nav>
+
+                <img
+                    src="assets/banner-industria.png"
+                    alt="Imagem Industrial">
+
+                <div class="texto-banner">
+                    <p>
+                        Planejamento de recursos, cálculo de horas e apoio às operações de manutenção.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="card-header">
+                <h1>Calculadora de Horas</h1>
+            </div>
+
+            <div class="conteudo-calculadora">
+
+                <div class="inputs">
+
+                    <div class="cabecalho">
+                        <span>Horas</span>
+                        <span>Minutos</span>
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                    <div class="linha">
+                        <input type="number" class="hora" min="0">
+                        <span>:</span>
+                        <input type="number" class="minuto" min="0" max="59">
+                    </div>
+
+                </div>
+
+                <div class="resultado-container">
+
+                    <h2>Resultado</h2>
+
+                    <div id="resultado">
+                        00:00
+                    </div>
+
+                    <button type="button" id="btnLimpar">
+                        Limpar
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="assinatura">
+
+                <img
+                    src="assets/logo-gm.png"
+                    alt="Logo GM"
+                    class="logo-gm">
+
+                <span>
+                    © 2026 Renan de Jesus | Calculadora de Horas V1.8
+                </span>
+
+                <img
+                    src="assets/logo-manutencao.png"
+                    alt="Logo Manutenção"
+                    class="logo-manutencao">
+
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="sobre.html" class="btn-sobre">
+                    Sobre o Projeto
+                </a>
+            </div>
+
         </div>
 
-        <h1>Planejamento de Capacidade da Manutenção</h1>
-
-        <label for="total">Funcionários Totais</label>
-        <input type="number" id="total" value="20">
-
-        <label for="ferias">Funcionários em Férias</label>
-        <input type="number" id="ferias" value="0">
-
-        <label for="abs">Absenteísmo (%)</label>
-        <input type="number" id="abs" value="0">
-
-        <button onclick="calcular()">
-            Calcular Capacidade
-        </button>
-
-        <div class="resultado">
-
-            <div class="kpi">
-                👥 Funcionários Disponíveis:
-                <strong><span id="disp"></span></strong>
-            </div>
-
-            <div class="kpi">
-                📈 Disponibilidade:
-                <strong><span id="disponibilidade"></span>%</strong>
-            </div>
-
-            <div class="kpi">
-                ⏰ Horas por Dia:
-                <strong><span id="dia"></span></strong>
-            </div>
-
-            <div class="kpi">
-                📅 Horas por Mês:
-                <strong><span id="mes"></span></strong>
-            </div>
-
-            <div class="kpi">
-                ⚠️ Horas Perdidas:
-                <strong><span id="perdidas"></span></strong>
-            </div>
-
-            <div class="kpi verde">
-                ✅ Capacidade Real:
-                <strong><span id="real"></span></strong>
-            </div>
-
-        </div>
-
-    </div>
+    </main>
 
     <script src="script.js"></script>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            const button = document.querySelector(".menu-btn");
+
+            const aberto = menu.classList.toggle("active");
+
+            button.setAttribute("aria-expanded", aberto);
+        }
+
+        document.addEventListener("click", function (event) {
+            const menu = document.getElementById("menu");
+            const button = document.querySelector(".menu-btn");
+
+            if (
+                menu &&
+                button &&
+                !menu.contains(event.target) &&
+                !button.contains(event.target)
+            ) {
+                menu.classList.remove("active");
+                button.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                const menu = document.getElementById("menu");
+                const button = document.querySelector(".menu-btn");
+
+                menu.classList.remove("active");
+                button.setAttribute("aria-expanded", "false");
+            }
+        });
+    </script>
 
 </body>
 
