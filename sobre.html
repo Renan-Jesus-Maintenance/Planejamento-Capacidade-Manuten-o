@@ -4,8 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Sobre o Projeto</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .sobre-texto {
+            max-width: 720px;
+            margin: 0 auto;
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.75;
+            text-align: left;
+        }
+
+        .sobre-texto p {
+            margin: 0 0 18px;
+        }
+
+        .sobre-texto h2 {
+            margin: 28px 0 10px;
+            color: #1e4775;
+            font-size: 19px;
+            text-align: left;
+        }
+
+        .sobre-texto strong {
+            color: #1e3f67;
+        }
+
+        .tecnologias {
+            margin: 8px 0 22px;
+            padding-left: 20px;
+        }
+
+        .tecnologias li {
+            margin-bottom: 5px;
+        }
+
+        .versao {
+            margin-top: 24px !important;
+            padding-top: 16px;
+            border-top: 1px solid #dbe5f0;
+            font-size: 14px;
+        }
+
+        .area-botao {
+            margin-top: 28px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,59 +67,79 @@
                 <h1>Sobre o Projeto</h1>
             </div>
 
-            <div style="line-height:1.8; color:#334155;">
+            <section class="sobre-texto">
 
                 <p>
-                    A Calculadora de Horas é uma ferramenta desenvolvida por
+                    Este projeto reúne duas ferramentas voltadas às atividades de manutenção:
+                    a <strong>Calculadora de Horas</strong> e a
+                    <strong>Consulta de Escala Diária</strong>.
+                </p>
+
+                <h2>Calculadora de Horas</h2>
+
+                <p>
+                    A Calculadora de Horas foi desenvolvida por
                     <strong>Renan de Jesus</strong>, Técnico em Mecatrônica e estudante de
                     <strong>Análise e Desenvolvimento de Sistemas pela Universidade do Vale do Rio dos Sinos
-                        (UNISINOS)</strong>,
-                    com conclusão prevista para o segundo semestre de 2026.
+                        (UNISINOS)</strong>, com conclusão prevista para o segundo semestre de 2026.
                 </p>
-
-                <br>
 
                 <p>
-                    O projeto foi criado com o objetivo de auxiliar no cálculo de horas trabalhadas,
-                    planejamento de recursos e apoio às operações de manutenção, proporcionando uma
-                    ferramenta simples, intuitiva e acessível para computadores e dispositivos móveis.
+                    A ferramenta auxilia no cálculo de horas trabalhadas,
+                    na conferência de jornadas e no planejamento de recursos
+                    para as operações de manutenção.
                 </p>
 
-                <br>
+                <h2>Consulta de Escala Diária</h2>
 
                 <p>
-                    Esta iniciativa representa a integração entre conhecimentos de manutenção industrial,
-                    automação, tecnologia da informação e melhoria contínua, contribuindo para a otimização
-                    de processos e a transformação digital das operações.
+                    A Consulta de Escala Diária permite verificar, de forma rápida
+                    e organizada, as pessoas escaladas para cada dia, suas funções
+                    e respectivos turnos.
                 </p>
-
-                <br>
 
                 <p>
-                    Tecnologias utilizadas:
-                    <strong>HTML5, CSS3, JavaScript, Git, GitHub e GitHub Pages.</strong>
+                    Dessa forma, a ferramenta contribui para o planejamento das equipes
+                    e para a organização das atividades de manutenção.
                 </p>
 
-                <br>
-
-        
-
-                <br>
+                <h2>Objetivo do Projeto</h2>
 
                 <p>
-                    Versão Atual: <strong>V1.8</strong>
+                    O projeto foi desenvolvido para oferecer ferramentas simples,
+                    intuitivas e acessíveis em computadores e dispositivos móveis,
+                    apoiando as operações de manutenção e a tomada de decisão no dia a dia.
                 </p>
 
-                <!-- BOTÃO VOLTAR -->
-                <div style="text-align:center; margin-top:30px;">
+                <p>
+                    Esta iniciativa integra conhecimentos de manutenção industrial,
+                    automação, tecnologia da informação e melhoria contínua,
+                    contribuindo para a otimização de processos e a transformação
+                    digital das operações.
+                </p>
 
+                <h2>Tecnologias Utilizadas</h2>
+
+                <ul class="tecnologias">
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                    <li>Git</li>
+                    <li>GitHub</li>
+                    <li>GitHub Pages</li>
+                </ul>
+
+                <p class="versao">
+                    <strong>Versão atual:</strong> V1.8
+                </p>
+
+                <div class="area-botao">
                     <a href="index.html" class="btn-voltar">
                         ← Voltar à Calculadora
                     </a>
-
                 </div>
 
-            </div>
+            </section>
 
         </div>
 

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Planejamento de Manutenção</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .planejamento-page {
+            min-height: 100vh;
+            padding: 16px 12px 40px;
+            background: #f4f7fb;
+            font-family: Poppins, Arial, sans-serif;
+            color: #10243e;
+        }
+
+        .planejamento-shell {
+            width: min(100%, 1120px);
+            margin: 0 auto;
+        }
+
+        .menu-area {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .menu-btn {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            color: #fff;
+            background: linear-gradient(145deg, #0d6efd, #084298);
+            border: 0;
+            border-radius: 11px;
+            box-shadow: 0 7px 15px rgba(13, 110, 253, .24);
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .menu-lateral {
+            position: absolute;
+            top: 52px;
+            left: 0;
+            z-index: 10;
+            display: none;
+            width: 240px;
+            padding: 8px;
+            background: #fff;
+            border: 1px solid #dbe5f0;
+            border-radius: 13px;
+            box-shadow: 0 16px 32px rgba(24, 55, 94, .16);
+        }
+
+        .menu-lateral.active {
+            display: grid;
+        }
+
+        .menu-lateral a {
+            padding: 12px;
+            color: #213a59;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .menu-lateral a:hover,
+        .menu-lateral a[aria-current="page"] {
+            color: #084298;
+            background: #eef5ff;
+        }
+
+        .planejamento-hero {
+            padding: 38px 28px;
+            color: #fff;
+            text-align: center;
+            background: linear-gradient(135deg, #0b2a52, #0d6efd);
+            border-radius: 24px;
+            box-shadow: 0 18px 42px rgba(24, 55, 94, .18);
+        }
+
+        .planejamento-hero small {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            opacity: .8;
+        }
+
+        .planejamento-hero h1 {
+            margin: 0;
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.1;
+        }
+
+        .planejamento-hero p {
+            max-width: 650px;
+            margin: 16px auto 0;
+            color: rgba(255, 255, 255, .85);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .formulario-planejamento {
+            margin-top: 22px;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #dbe5f0;
+            border-radius: 16px;
+            box-shadow: 0 8px 22px rgba(24, 55, 94, .06);
+        }
+
+        .campos-planejamento {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .campo {
+            display: grid;
+            gap: 7px;
+        }
+
+        .campo label {
+            color: #607089;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
+        .campo input {
+            width: 100%;
+            height: 46px;
+            padding: 0 14px;
+            color: #10243e;
+            background: #fff;
+            border: 1px solid #dbe5f0;
+            border-radius: 12px;
+            outline: none;
+            font: inherit;
+        }
+
+        .campo input:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 4px rgba(13, 110, 253, .14);
+        }
+
+        .botao-calcular {
+            width: 100%;
+            height: 46px;
+            margin-top: 16px;
+            color: #fff;
+            background: #0d6efd;
+            border: 0;
+            border-radius: 12px;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .botao-calcular:hover {
+            background: #084298;
+        }
+
+        .observacao {
+            margin: 12px 0 0;
+            color: #607089;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .mensagem-erro {
+            margin: 10px 0 0;
+            color: #b42318;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .resumo-planejamento {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .card-resumo {
+            padding: 18px 20px;
+            background: #fff;
+            border: 1px solid #dbe5f0;
+            border-radius: 16px;
+            box-shadow: 0 8px 22px rgba(24, 55, 94, .06);
+        }
+
+        .card-resumo span {
+            display: block;
+            color: #607089;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
+        .card-resumo strong {
+            display: block;
+            margin-top: 7px;
+            color: #138a63;
+            font-size: 30px;
+        }
+
+        .card-resumo:nth-child(2) strong {
+            color: #a86b00;
+        }
+
+        .card-resumo:nth-child(3) strong {
+            color: #084298;
+        }
+
+        .resultado-planejamento {
+            margin-top: 18px;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #dbe5f0;
+            border-radius: 16px;
+            box-shadow: 0 8px 22px rgba(24, 55, 94, .06);
+        }
+
+        .resultado-planejamento h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .data-resultado {
+            margin: 5px 0 0;
+            color: #607089;
+            font-size: 14px;
+        }
+
+        .descricao-resultado {
+            margin: 14px 0 0;
+            color: #607089;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 760px) {
+            .campos-planejamento,
+            .resumo-planejamento {
+                grid-template-columns: 1fr;
+            }
+
+            .planejamento-hero {
+                padding: 30px 20px;
+                border-radius: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="planejamento-page">
+
+        <div class="planejamento-shell">
+
+            <div class="menu-area">
+
+                <button
+                    type="button"
+                    class="menu-btn"
+                    onclick="toggleMenu()"
+                    aria-label="Abrir menu"
+                    aria-controls="menu"
+                    aria-expanded="false">
+                    ☰
+                </button>
+
+                <nav id="menu" class="menu-lateral">
+                    <a href="index.html">Calculadora de Horas</a>
+                    <a href="escala.html">Consulta de Escala</a>
+                    <a href="planejamento.html" aria-current="page">
+                        Planejamento Manutenção
+                    </a>
+                    <a href="sobre.html">Sobre</a>
+                </nav>
+
+            </div>
+
+            <section class="planejamento-hero">
+                <small>Body Shop · Manutenção · T3</small>
+
+                <h1>Planejamento de manutenção</h1>
+
+                <p>
+                    Informe a data, a quantidade de pessoas e as horas de atividade
+                    para calcular o total de horas da equipe.
+                </p>
+            </section>
+
+            <form id="formPlanejamento" class="formulario-planejamento">
+
+                <div class="campos-planejamento">
+
+                    <div class="campo">
+                        <label for="dataPlanejamento">
+                            Data da atividade
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dataPlanejamento"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="quantidadePessoas">
+                            Quantidade de pessoas
+                        </label>
+
+                        <input
+                            type="number"
+                            id="quantidadePessoas"
+                            min="0"
+                            step="1"
+                            placeholder="Ex.: 5"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="horasAtividade">
+                            Horas por pessoa
+                        </label>
+
+                        <input
+                            type="number"
+                            id="horasAtividade"
+                            min="0"
+                            step="1"
+                            placeholder="Ex.: 8"
+                            required>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="botao-calcular">
+                    Calcular planejamento
+                </button>
+
+                <p class="observacao">
+                    O total da equipe é calculado multiplicando a quantidade de pessoas
+                    pelas horas de atividade por pessoa.
+                </p>
+
+                <p id="mensagemErro" class="mensagem-erro" hidden>
+                    Informe valores válidos maiores ou iguais a zero.
+                </p>
+
+            </form>
+
+            <section class="resumo-planejamento">
+
+                <div class="card-resumo">
+                    <span>Pessoas</span>
+                    <strong id="resultadoPessoas">0</strong>
+                </div>
+
+                <div class="card-resumo">
+                    <span>Horas por pessoa</span>
+                    <strong id="resultadoHoras">0 h</strong>
+                </div>
+
+                <div class="card-resumo">
+                    <span>Total da equipe</span>
+                    <strong id="resultadoTotal">0 h</strong>
+                </div>
+
+            </section>
+
+            <section class="resultado-planejamento">
+
+                <h2>Resumo do planejamento</h2>
+
+                <p id="resultadoData" class="data-resultado">
+                    Selecione uma data e informe os valores.
+                </p>
+
+                <p id="resultadoDescricao" class="descricao-resultado">
+                    O resultado será apresentado aqui após o cálculo.
+                </p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <script>
+        const formPlanejamento =
+            document.getElementById("formPlanejamento");
+
+        const dataPlanejamento =
+            document.getElementById("dataPlanejamento");
+
+        const quantidadePessoas =
+            document.getElementById("quantidadePessoas");
+
+        const horasAtividade =
+            document.getElementById("horasAtividade");
+
+        const mensagemErro =
+            document.getElementById("mensagemErro");
+
+        const resultadoPessoas =
+            document.getElementById("resultadoPessoas");
+
+        const resultadoHoras =
+            document.getElementById("resultadoHoras");
+
+        const resultadoTotal =
+            document.getElementById("resultadoTotal");
+
+        const resultadoData =
+            document.getElementById("resultadoData");
+
+        const resultadoDescricao =
+            document.getElementById("resultadoDescricao");
+
+        const hoje = new Date();
+
+        const hojeFormatado = new Date(
+            hoje.getTime() - hoje.getTimezoneOffset() * 60000
+        ).toISOString().slice(0, 10);
+
+        dataPlanejamento.value = hojeFormatado;
+
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            const button = document.querySelector(".menu-btn");
+
+            const aberto = menu.classList.toggle("active");
+
+            button.setAttribute("aria-expanded", aberto);
+        }
+
+        document.addEventListener("click", function (event) {
+            const menu = document.getElementById("menu");
+            const button = document.querySelector(".menu-btn");
+
+            if (
+                menu &&
+                button &&
+                !menu.contains(event.target) &&
+                !button.contains(event.target)
+            ) {
+                menu.classList.remove("active");
+                button.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                const menu = document.getElementById("menu");
+                const button = document.querySelector(".menu-btn");
+
+                menu.classList.remove("active");
+                button.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        formPlanejamento.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const pessoas = Number(quantidadePessoas.value);
+            const horas = Number(horasAtividade.value);
+            const data = dataPlanejamento.value;
+
+            if (
+                !data ||
+             
