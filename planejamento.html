@@ -10,29 +10,53 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         .planejamento-page {
             min-height: 100vh;
-            padding: 16px 12px 40px;
-            background: #f4f7fb;
+            padding: 0 20px 40px;
+            background: #eef2f7;
             font-family: Poppins, Arial, sans-serif;
             color: #10243e;
         }
 
         .planejamento-shell {
-            width: min(100%, 1120px);
+            position: relative;
+            width: min(100%, 700px);
             margin: 0 auto;
+            padding: 12px 40px 40px;
+            background: #fff;
+            border-radius: 20px;
         }
 
         .menu-area {
-            position: relative;
-            margin-bottom: 16px;
+            position: relative !important;
+            top: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            left: auto !important;
+            z-index: 1000;
+            width: 100%;
+            height: 44px;
+            margin: 0 0 28px !important;
+            padding: 0 !important;
+            overflow: visible !important;
         }
 
         .menu-btn {
-            display: grid;
+            position: relative !important;
+            top: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            left: auto !important;
+            display: grid !important;
             place-items: center;
-            width: 44px;
-            height: 44px;
+            width: 44px !important;
+            height: 44px !important;
+            margin: 0 !important;
+            padding: 0 !important;
             color: #fff;
             background: linear-gradient(145deg, #0d6efd, #084298);
             border: 0;
@@ -40,15 +64,22 @@
             box-shadow: 0 7px 15px rgba(13, 110, 253, .24);
             font-size: 25px;
             cursor: pointer;
+            transform: none !important;
+        }
+
+        .menu-btn:hover {
+            background: #084298;
         }
 
         .menu-lateral {
-            position: absolute;
-            top: 52px;
-            left: 0;
-            z-index: 10;
+            position: absolute !important;
+            top: 52px !important;
+            left: 0 !important;
+            right: auto !important;
+            z-index: 9999 !important;
             display: none;
             width: 240px;
+            margin: 0 !important;
             padding: 8px;
             background: #fff;
             border: 1px solid #dbe5f0;
@@ -57,7 +88,7 @@
         }
 
         .menu-lateral.active {
-            display: grid;
+            display: grid !important;
         }
 
         .menu-lateral a {
@@ -76,12 +107,32 @@
         }
 
         .planejamento-hero {
-            padding: 38px 28px;
+            position: relative;
+            overflow: hidden;
+            padding: 38px 24px;
             color: #fff;
             text-align: center;
             background: linear-gradient(135deg, #0b2a52, #0d6efd);
-            border-radius: 24px;
+            border-radius: 18px;
             box-shadow: 0 18px 42px rgba(24, 55, 94, .18);
+        }
+
+        .planejamento-hero::after {
+            content: "";
+            position: absolute;
+            top: -60px;
+            right: -40px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, .10);
+            border-radius: 50%;
+        }
+
+        .planejamento-hero small,
+        .planejamento-hero h1,
+        .planejamento-hero p {
+            position: relative;
+            z-index: 1;
         }
 
         .planejamento-hero small {
@@ -91,26 +142,26 @@
             font-weight: 700;
             letter-spacing: .12em;
             text-transform: uppercase;
-            opacity: .8;
+            opacity: .85;
         }
 
         .planejamento-hero h1 {
             margin: 0;
-            font-size: clamp(30px, 5vw, 48px);
+            font-size: clamp(30px, 5vw, 44px);
             line-height: 1.1;
         }
 
         .planejamento-hero p {
-            max-width: 650px;
+            max-width: 600px;
             margin: 16px auto 0;
-            color: rgba(255, 255, 255, .85);
+            color: rgba(255, 255, 255, .88);
             font-size: 14px;
             line-height: 1.6;
         }
 
         .formulario-planejamento {
             margin-top: 22px;
-            padding: 20px;
+            padding: 18px;
             background: #fff;
             border: 1px solid #dbe5f0;
             border-radius: 16px;
@@ -192,7 +243,7 @@
         }
 
         .card-resumo {
-            padding: 18px 20px;
+            padding: 18px 16px;
             background: #fff;
             border: 1px solid #dbe5f0;
             border-radius: 16px;
@@ -223,34 +274,16 @@
             color: #084298;
         }
 
-        .resultado-planejamento {
-            margin-top: 18px;
-            padding: 20px;
-            background: #fff;
-            border: 1px solid #dbe5f0;
-            border-radius: 16px;
-            box-shadow: 0 8px 22px rgba(24, 55, 94, .06);
-        }
-
-        .resultado-planejamento h2 {
-            margin: 0;
-            font-size: 22px;
-        }
-
-        .data-resultado {
-            margin: 5px 0 0;
-            color: #607089;
-            font-size: 14px;
-        }
-
-        .descricao-resultado {
-            margin: 14px 0 0;
-            color: #607089;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
         @media (max-width: 760px) {
+            .planejamento-page {
+                padding: 0 12px 30px;
+            }
+
+            .planejamento-shell {
+                width: 100%;
+                padding: 12px 20px 32px;
+            }
+
             .campos-planejamento,
             .resumo-planejamento {
                 grid-template-columns: 1fr;
@@ -259,6 +292,10 @@
             .planejamento-hero {
                 padding: 30px 20px;
                 border-radius: 18px;
+            }
+
+            .menu-lateral {
+                width: 220px;
             }
         }
     </style>
@@ -275,7 +312,7 @@
                 <button
                     type="button"
                     class="menu-btn"
-                    onclick="toggleMenu()"
+                    id="menuBtn"
                     aria-label="Abrir menu"
                     aria-controls="menu"
                     aria-expanded="false">
@@ -283,17 +320,27 @@
                 </button>
 
                 <nav id="menu" class="menu-lateral">
-                    <a href="index.html">Calculadora de Horas</a>
-                    <a href="escala.html">Consulta de Escala</a>
-                    <a href="planejamento.html" aria-current="page">
-                        Planejamento Manutenção
+                    <a href="index.html">
+                        Calculadora de horas
                     </a>
-                    <a href="sobre.html">Sobre</a>
+
+                    <a href="escala.html">
+                        Consulta de escala
+                    </a>
+
+                    <a href="planejamento.html" aria-current="page">
+                        Planejamento de manutenção
+                    </a>
+
+                    <a href="sobre.html">
+                        Sobre
+                    </a>
                 </nav>
 
             </div>
 
             <section class="planejamento-hero">
+
                 <small>Body Shop · Manutenção · T3</small>
 
                 <h1>Planejamento de manutenção</h1>
@@ -302,6 +349,7 @@
                     Informe a data, a quantidade de pessoas e as horas de atividade
                     para calcular o total de horas da equipe.
                 </p>
+
             </section>
 
             <form id="formPlanejamento" class="formulario-planejamento">
@@ -383,25 +431,14 @@
 
             </section>
 
-            <section class="resultado-planejamento">
-
-                <h2>Resumo do planejamento</h2>
-
-                <p id="resultadoData" class="data-resultado">
-                    Selecione uma data e informe os valores.
-                </p>
-
-                <p id="resultadoDescricao" class="descricao-resultado">
-                    O resultado será apresentado aqui após o cálculo.
-                </p>
-
-            </section>
-
         </div>
 
     </main>
 
     <script>
+        const menu = document.getElementById("menu");
+        const menuBtn = document.getElementById("menuBtn");
+
         const formPlanejamento =
             document.getElementById("formPlanejamento");
 
@@ -426,51 +463,40 @@
         const resultadoTotal =
             document.getElementById("resultadoTotal");
 
-        const resultadoData =
-            document.getElementById("resultadoData");
+        function obterDataAtual() {
+            const hoje = new Date();
 
-        const resultadoDescricao =
-            document.getElementById("resultadoDescricao");
+            const ano = hoje.getFullYear();
+            const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+            const dia = String(hoje.getDate()).padStart(2, "0");
 
-        const hoje = new Date();
+            return `${ano}-${mes}-${dia}`;
+        }
 
-        const hojeFormatado = new Date(
-            hoje.getTime() - hoje.getTimezoneOffset() * 60000
-        ).toISOString().slice(0, 10);
+        dataPlanejamento.value = obterDataAtual();
 
-        dataPlanejamento.value = hojeFormatado;
-
-        function toggleMenu() {
-            const menu = document.getElementById("menu");
-            const button = document.querySelector(".menu-btn");
+        menuBtn.addEventListener("click", function (event) {
+            event.stopPropagation();
 
             const aberto = menu.classList.toggle("active");
 
-            button.setAttribute("aria-expanded", aberto);
-        }
+            menuBtn.setAttribute("aria-expanded", aberto);
+        });
 
         document.addEventListener("click", function (event) {
-            const menu = document.getElementById("menu");
-            const button = document.querySelector(".menu-btn");
-
             if (
-                menu &&
-                button &&
                 !menu.contains(event.target) &&
-                !button.contains(event.target)
+                !menuBtn.contains(event.target)
             ) {
                 menu.classList.remove("active");
-                button.setAttribute("aria-expanded", "false");
+                menuBtn.setAttribute("aria-expanded", "false");
             }
         });
 
         document.addEventListener("keydown", function (event) {
             if (event.key === "Escape") {
-                const menu = document.getElementById("menu");
-                const button = document.querySelector(".menu-btn");
-
                 menu.classList.remove("active");
-                button.setAttribute("aria-expanded", "false");
+                menuBtn.setAttribute("aria-expanded", "false");
             }
         });
 
@@ -481,6 +507,28 @@
             const horas = Number(horasAtividade.value);
             const data = dataPlanejamento.value;
 
-            if (
-                !data ||
-             
+            const valoresValidos =
+                data &&
+                Number.isFinite(pessoas) &&
+                Number.isFinite(horas) &&
+                pessoas >= 0 &&
+                horas >= 0;
+
+            if (!valoresValidos) {
+                mensagemErro.hidden = false;
+                return;
+            }
+
+            mensagemErro.hidden = true;
+
+            const totalHoras = pessoas * horas;
+
+            resultadoPessoas.textContent = pessoas;
+            resultadoHoras.textContent = `${horas} h`;
+            resultadoTotal.textContent = `${totalHoras} h`;
+        });
+    </script>
+
+</body>
+
+</html>

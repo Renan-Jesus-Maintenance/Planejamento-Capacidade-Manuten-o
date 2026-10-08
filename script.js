@@ -1,15 +1,6 @@
-// Abre e fecha o menu
-function toggleMenu() {
-    const menu = document.getElementById("menu");
-
-    if (menu) {
-        menu.classList.toggle("active");
-    }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     const menu = document.getElementById("menu");
-    const botaoMenu = document.querySelector(".menu-btn");
+    const botaoMenu = document.getElementById("menuBtn");
 
     const horas = document.querySelectorAll(".hora");
     const minutos = document.querySelectorAll(".minuto");
@@ -17,17 +8,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultado = document.getElementById("resultado");
     const btnLimpar = document.getElementById("btnLimpar");
 
-    // Fecha o menu ao clicar fora
-    document.addEventListener("click", function (event) {
-        const clicouNoMenu = menu.contains(event.target);
-        const clicouNoBotao = botaoMenu.contains(event.target);
+    botaoMenu.addEventListener("click", function (event) {
+        event.stopPropagation();
 
-        if (!clicouNoMenu && !clicouNoBotao) {
+        const aberto = menu.classList.toggle("active");
+
+        botaoMenu.setAttribute("aria-expanded", aberto);
+    });
+
+    document.addEventListener("click", function (event) {
+        if (
+            !menu.contains(event.target) &&
+            !botaoMenu.contains(event.target)
+        ) {
             menu.classList.remove("active");
+            botaoMenu.setAttribute("aria-expanded", "false");
         }
     });
 
-    // Calcula automaticamente
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            menu.classList.remove("active");
+            botaoMenu.setAttribute("aria-expanded", "false");
+        }
+    });
+
     horas.forEach(function (input) {
         input.addEventListener("input", calcular);
     });
@@ -40,10 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let totalMinutos = 0;
 
         for (let i = 0; i < horas.length; i++) {
-            const h = parseInt(horas[i].value) || 0;
-            const m = parseInt(minutos[i].value) || 0;
+            const valorHoras = parseInt(horas[i].value, 10) || 0;
+            const valorMinutos = parseInt(minutos[i].value, 10) || 0;
 
-            totalMinutos += (h * 60) + m;
+            totalMinutos += (valorHoras * 60) + valorMinutos;
         }
 
         const horasTotal = Math.floor(totalMinutos / 60);
@@ -55,14 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
             String(minutosTotal).padStart(2, "0");
     }
 
-    // Limpa os campos
-    function limpar() {
+    btnLimpar.addEventListener("click", function () {
         document.querySelectorAll("input").forEach(function (input) {
             input.value = "";
         });
 
         resultado.textContent = "00:00";
-    }
-
-    btnLimpar.addEventListener("click", limpar);
+    });
 });
